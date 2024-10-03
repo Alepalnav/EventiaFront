@@ -1,0 +1,57 @@
+:root {
+    --nav-color: #011627;  /* Color principal */
+    --secondary-color: #4B3F72; /* Color secundario */
+    --back-color: #FFFCE1; /* Color secundario */
+    --green-color: #011627; /* Color secundario */
+    --font-logo: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+#logo{
+    font-family: var(--font-logo);
+}
+
+.btn-1 {
+    background-color: var(--green-color);
+    color: white;
+}
+.btn-1:hover {
+    background-color: #01325a;
+    color: white;
+}
+/* Asegúrate de que html y body ocupen el 100% de la altura */
+html, body {
+    height: 100%;
+    margin: 0; /* Elimina el margen predeterminado */
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+}
+
+/* Clase para el contenedor principal */
+.main-content {
+    flex: 1; /* Ocupa el espacio restante */
+    display: flex; 
+    flex-direction: column; /* Permite al contenido apilarse verticalmente */
+}
+
+/* Asegúrate de que app-footer tenga una altura definida */
+app-footer {
+    flex-shrink: 0; /* Evita que el footer se encoja */
+    height: 150px; /* Define la altura del footer */
+    background-color: #011627; /* Cambia el color según tu diseño */
+    color: white; /* Cambia el color del texto según tu diseño */
+}
+
+/* Estilo para el índice */
+.container-fluid {
+    min-height: calc(100vh - 250px); /* Ajusta esto según las alturas de navbar y footer */
+    align-content: center; 
+}
+
+/* Añade algún estilo básico al footer para asegurar que sea visible */
+app-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centra el texto */
+    font-size: 1rem; /* Ajusta el tamaño del texto del footer */
+}

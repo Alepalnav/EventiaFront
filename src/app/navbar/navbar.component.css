@@ -1,0 +1,93 @@
+ /* Ajuste del navbar en general */
+ 
+ 
+ .navbar-custom {
+    height: 100px; /* Mantiene la altura del navbar */
+    background-color: #011627; /* Color de fondo */
+    padding: 0 20px; /* Añade algo de espacio interior */
+  }
+
+  /* Título del navbar */
+  .navbar-brand {
+    font-size: 2rem; /* Aumenta el tamaño del título */
+    margin-left: 50px; /* Desplaza el título ligeramente hacia la derecha */
+    color: #fff; /* Color del título */
+  }
+
+  /* Elementos del menú a la derecha */
+  .navbar-nav {
+    margin-left: auto; /* Alinea los elementos del menú a la derecha */
+  }
+
+  /* Espacio entre los elementos de la lista */
+  .nav-item {
+    margin-right: 30px; /* Añade espacio entre los ítems del menú */
+  }
+
+  /* Color del texto de los elementos del navbar */
+  .nav-link {
+    color: #fff;
+  }
+
+  /* Color de fondo del dropdown al estar desplegado */
+  .dropdown-menu {
+    background-color: #011627;
+  }
+
+  /* Ajuste del botón en pantallas pequeñas */
+  .navbar-toggler {
+    margin-right: 20px; /* Espacio para el botón toggler en pantallas pequeñas */
+  }
+
+  .dropdown-item {
+    color: #fff;
+  }
+
+  .dropdown-item:hover {
+    color: #011627;
+  }
+
+
+
+
+  /* Ajuste en pantallas pequeñas para que el navbar se expanda correctamente */
+  @media (max-width: 992px) {
+    .navbar-brand {
+        margin: 20px;
+    }
+    .navbar-custom {
+        height: auto; /* Ajusta la altura del navbar cuando colapsa */
+    }
+    .navbar-collapse {
+      background-color: #011627; /* Fondo completo cuando se despliega en móviles */
+      width: 100%; /* Que el fondo cubra todo el ancho */
+    }
+    .navbar-nav {
+      width: 100%; /* Hace que el menú ocupe el ancho completo */
+    }
+    .nav-item {
+      margin-right: 0; /* Sin margen entre los elementos en pantallas pequeñas */
+    }
+  }
+
+  .nav-link {
+    color: #fff; /* Color del texto */
+    transition: color 0.3s; /* Suaviza el cambio de color */
+}
+.nav-link:hover {
+    color: #f39c12; /* Color al pasar el cursor */
+}
+.nav-item.active .nav-link {
+    font-weight: bold; /* Resaltar el enlace activo */
+}
+.nav-link.active::after {
+    content: ""; /* Contenido vacío */
+    position: absolute; /* Posicionamiento absoluto */
+    left: 0; /* Alineado a la izquierda */
+    right: 0; /* Alineado a la derecha */
+    bottom: -5px; /* Espacio desde el texto hacia abajo */
+    height: 4px; /* Altura de la barra */
+    background-color: #f39c12; /* Color de la barra activa */
+    border-radius: 2px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave */
+}
