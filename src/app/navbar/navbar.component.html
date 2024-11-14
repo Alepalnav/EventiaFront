@@ -10,18 +10,25 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/" id="home-link">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="features-link">Events</a>
-                </li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown link
+                        Events
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" routerLink="/events">Events list</a>
+                        <a class="dropdown-item" routerLink="/events/add">Add Event</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{user.name}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" routerLink="/events/participations">Participations</a>
+                        <div *ngIf="isOrg">
+                            <a class="dropdown-item" routerLink="/events/manage">Manage Events</a>
+                        </div>
                     </div>
                 </li>
                 <li class="nav-item">

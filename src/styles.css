@@ -14,8 +14,16 @@
     background-color: var(--green-color);
     color: white;
 }
+.btn-2 {
+    background-color: #004f90;
+    color: white;
+}
 .btn-1:hover {
     background-color: #01325a;
+    color: white;
+}
+.btn-2:hover {
+    background-color: #0077d9;
     color: white;
 }
 /* Asegúrate de que html y body ocupen el 100% de la altura */

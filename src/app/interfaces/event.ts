@@ -15,6 +15,9 @@ export interface Event {
     hour_finsh:     Time;
     place: string;
     category: string;
+    max_participant: number;
+    participants: number;
+    available: number;
     participations:   Participation[];
     ratings:   Rating[];
     notifications:   Notification[];
