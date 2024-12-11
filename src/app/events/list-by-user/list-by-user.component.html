@@ -26,6 +26,9 @@
                                 <div *ngIf="compararFecha(event.date_start)">
                                     <a (click)="cancel(event.id)" class="btn btn-1 mx-2">Cancel</a>
                                 </div>
+                                <div *ngIf="!compararFecha(event.date_start)">
+                                    <a (click)="rateEvent(event.id)" class="btn btn-1 mx-2">Rate Event</a>
+                                </div>
                             </div>
                         </div>
                     </div>

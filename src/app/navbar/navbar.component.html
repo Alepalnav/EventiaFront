@@ -17,7 +17,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" routerLink="/events">Events list</a>
-                        <a class="dropdown-item" routerLink="/events/add">Add Event</a>
+                        <a *ngIf="isOrg" class="dropdown-item" routerLink="/events/add">Add Event</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -28,6 +28,9 @@
                         <a class="dropdown-item" routerLink="/events/participations">Participations</a>
                         <div *ngIf="isOrg">
                             <a class="dropdown-item" routerLink="/events/manage">Manage Events</a>
+                        </div>
+                        <div *ngIf="isAdmin">
+                            <a class="dropdown-item" routerLink="/auth/users">Manage Users</a>
                         </div>
                     </div>
                 </li>

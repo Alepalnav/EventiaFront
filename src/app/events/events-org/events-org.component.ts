@@ -36,27 +36,25 @@ export class EventsOrgComponent {
       this.servicio.eventsByOrg(this.id).subscribe({
         next:(res)=>{
           this.events=res;
-          console.log(this.events[0].date_start)
-          console.log(this.today);
         }
       })
       
   }
 
-  details(id:number){
-    this.servicio.getEvent(id).subscribe({
-      next:(res)=>{
-        Swal.fire({
-          title: res.title,
-          html: `<p><strong>Description:</strong> ${res.descrip}</p>
-                <p><strong>Place:</strong> ${res.place}</p>
-                <p><strong>Date:</strong> ${res.date_start}  ${res.hour_start}</p>`,
-          icon: "info"
-        });
+  // details(id:number){
+  //   this.servicio.getEvent(id).subscribe({
+  //     next:(res)=>{
+  //       Swal.fire({
+  //         title: res.title,
+  //         html: `<p><strong>Description:</strong> ${res.descrip}</p>
+  //               <p><strong>Place:</strong> ${res.place}</p>
+  //               <p><strong>Date:</strong> ${res.date_start}  ${res.hour_start}</p>`,
+  //         icon: "info"
+  //       });
         
-      }
-    })
-  }
+  //     }
+  //   })
+  // }
 
   compararFecha(date: Date): boolean{
     const hoy = new Date();
@@ -73,43 +71,57 @@ export class EventsOrgComponent {
     this.router.navigate(['/events/event',id]);
   }
 
-  participants(id:number){
+  participants(id: number) {
     let participants: User[] = [];
     this.servicio.getParticipants(id).subscribe({
-      next:(res)=>{
+      next: (res) => {
         participants = res;
-
-        let participantsList = `<ul>`;
+  
+        let participantsList = `
+          <div class="container">
+            <div class="row">
+        `;
         res.forEach((participant) => {
           participantsList += `
-            <li>
-              ${participant.name}
-              <button class="btn btn-warning mx-2" onclick="triggerParticipantAction(${participant.id}, ${id})">Notify</button>
-            </li>
+            <div class="col-12 mb-3">
+              <div class="card shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                  <div>
+                    <h5 class="card-title mb-0">${participant.name}</h5>
+                    <small class="text-muted">Participant ID: ${participant.id}</small>
+                  </div>
+                  <button class="btn btn-warning" onclick="triggerParticipantAction(${participant.id}, ${id})">
+                    <i class="bi bi-bell"></i> Notify
+                  </button>
+                </div>
+              </div>
+            </div>
           `;
         });
-        participantsList += `</ul>`;
-
+        participantsList += `</div></div>`;
+  
         Swal.fire({
           title: 'Participants',
           html: participantsList,
           icon: "info",
+          width: '600px',
           didOpen: () => {
-            // Define la función `triggerParticipantAction` dentro de `didOpen` para evitar problemas de contexto
+            // Define la función `triggerParticipantAction` dentro de `didOpen`
             (window as any).triggerParticipantAction = (participantId: number, eventId: number) => {
               this.notify(participantId, eventId);
-
-              // Swal.close();
             };
           },
           willClose: () => {
             // Limpia `triggerParticipantAction` para evitar fugas de memoria
             delete (window as any).triggerParticipantAction;
-          }
+          },
+          confirmButtonText: "Close",
+          confirmButtonColor: "#3085d6",
         });
       }
-    })
+    });
   }
+  
 
   notify(idUser:number, idEvent:number){
     Swal.fire({
@@ -142,7 +154,57 @@ export class EventsOrgComponent {
         console.log('Acción cancelada');
       }
     });
-
   }
+
+  deleteEvent(id: number) {
+    // Mostrar un SweetAlert para confirmar antes de proceder
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you really want to delete this event? This action cannot be undone!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Inicia el cargador (opcional si estás usando ngx-ui-loader)
+  
+        // Llama al servicio para eliminar el evento
+        this.servicio.deleteEvent(id).subscribe({
+          next: (res) => {
+
+  
+            // Mostrar mensaje de éxito
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The event has been deleted successfully.',
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+            });
+  
+            // Actualiza la lista de eventos
+            this.servicio.eventsByOrg(this.id).subscribe({
+              next:(res)=>{
+                this.events=res;
+              }
+            })
+          },
+          error: (err) => {
+  
+            // Mostrar mensaje de error
+            Swal.fire({
+              title: 'Error!',
+              text: 'No puede eliminarse un evento ya terminado',
+              icon: 'error',
+              confirmButtonColor: '#d33',
+            });
+          }
+        });
+      }
+    });
+  }
+  
 
 }

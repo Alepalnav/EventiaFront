@@ -88,4 +88,12 @@ export class UserService {
     return this.http.get<User>(`${this.url}/userById/${id}`);
   }
 
+  getUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${this.url}/users`);
+  }
+
+  changeRol(id:number):Observable<User>{
+    return this.http.get<User>(`${this.url}/changeRol/${id}`);
+  }
+
 }

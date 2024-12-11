@@ -5,6 +5,7 @@ import { Event } from '../interfaces/event';
 import { Participation } from '../interfaces/participation';
 import { User } from '../interfaces/user';
 import { Notification } from '../interfaces/notification';
+import { Rating } from '../interfaces/rating';
 
 @Injectable({
   providedIn: 'root'
@@ -27,12 +28,12 @@ export class EventService {
       .set('numPage', numPage.toString())
       .set('pageSize', pageSize.toString())
       .set('order', order)
-      .set('ad', ad ? 'asc' : 'desc');
-
+      .set('asc', ad ? 'true' : 'false');
+    console.log(`${this.url}/events`, { params });
     return this.http.get<any>(`${this.url}/events`, { params })
       .pipe(
         map(response => response.content.map((event: any) => ({
-          id: event.id,
+          id: event.id,  
           user: event.user,
           title: event.title,
           descrip: event.descrip,
@@ -89,5 +90,21 @@ export class EventService {
   addNotification(notification: Notification):Observable<Object>{
     return this.http.post<Object>(`${this.url}/notifications`,notification);
   }
+
+  isUserParticipating(idUser: number, idEvent: number) {
+    const params = new HttpParams()
+      .set('idUser', idUser)
+      .set('idEvent', idEvent)
+    return this.http.get<boolean>(`${this.url}/participate`,{params});
+  }
+
+  deleteEvent(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.url}/event/${id}`);
+  }
+
+  valorateEvent(rating: Rating):Observable<Object>{
+    return this.http.post<Object>(`${this.url}/valoration`,rating)
+  }
+
   
 }

@@ -41,6 +41,10 @@
                 <label for="max_participant" class="form-label fw-bold">Max participants:</label>
                 <input type="number" class="form-control" id="max_participant" name="max_participant" formControlName="max_participant" readonly>
               </div>
+              <div class="mb-3">
+                <label for="max_participant" class="form-label fw-bold">Actual participants:</label>
+                <input type="number" class="form-control" id="max_participant" name="max_participant" formControlName="participants" readonly>
+              </div>
               <div class="d-flex justify-content-between">
                 <a (click)="goBack()" class="btn btn-secondary rounded-pill">Back</a>
                 <a (click)="participate(id)" class="btn btn-1 rounded-pill">Join</a>
