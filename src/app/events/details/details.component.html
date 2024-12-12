@@ -1,0 +1,79 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
+          <div  class="card-header text-center bg-primary text-white">Event Details</div>
+          <div class="card-body">
+            <form [formGroup]="eventForm">
+              <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" formControlName="title" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="descrip" class="form-label fw-bold">Description:</label>
+                <input type="text" class="form-control" id="descrip" name="descrip" formControlName="descrip" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="date_start" class="form-label fw-bold">Date initial:</label>
+                <input type="date" class="form-control" id="date_start" name="date_start" formControlName="date_start" rows="3" readonly>
+            </div>
+              <div class="mb-3">
+                <label for="date_finish" class="form-label fw-bold">Date final:</label>
+                <input type="date" class="form-control" id="date_finish" name="date_finish" formControlName="date_finish" readonly>
+            </div>
+              <div class="mb-3">
+                <label for="hour_start" class="form-label fw-bold">Hour Initial:</label>
+                <input type="time" class="form-control" id="hour_start" name="hour_start" formControlName="hour_start" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="hour_finish" class="form-label fw-bold">Hour Final:</label>
+                <input type="time" class="form-control" id="hour_finish" name="hour_finish" formControlName="hour_finish" readonly>
+            </div>
+              <div class="mb-3">
+                <label for="place" class="form-label fw-bold">Place:</label>
+                <input type="text" class="form-control" id="place" name="place" formControlName="place" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label fw-bold">Category:</label>
+                <input type="text" class="form-control" id="category" name="category" formControlName="category" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="max_participant" class="form-label fw-bold">Max participants:</label>
+                <input type="number" class="form-control" id="max_participant" name="max_participant" formControlName="max_participant" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="max_participant" class="form-label fw-bold">Actual participants:</label>
+                <input type="number" class="form-control" id="max_participant" name="max_participant" formControlName="participants" readonly>
+              </div>
+              <div class="d-flex justify-content-between">
+                <a (click)="goBack()" class="btn btn-secondary rounded-pill">Back</a>
+                <a (click)="participate(id)" class="btn btn-1 rounded-pill">Join</a>
+              </div>
+            </form>
+
+            <hr class="my-4">
+          <h5 class="text-center text-primary">Event Reviews</h5>
+          <div *ngIf="ratings && ratings.length > 0; else noReviews">
+            <div *ngFor="let rating of ratings" class="card mb-3 shadow-sm">
+              <div class="card-body">
+                <!-- Mostrar estrellas según la valoración -->
+                <div class="d-flex align-items-center mb-2">
+                    <span *ngFor="let star of [1, 2, 3, 4, 5]">
+                      <span *ngIf="star <= rating.stars">⭐</span>
+                    </span>
+                  </div>
+                <p class="mb-0 fst-italic">"{{ rating.comment }}"</p>
+              </div>
+            </div>
+          </div>
+          <!-- Mostrar un mensaje si no hay valoraciones -->
+          <ng-template #noReviews>
+            <p class="text-center text-muted">No reviews yet. Be the first to review this event!</p>
+          </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>

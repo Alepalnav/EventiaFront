@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <div class="card shadow-lg">
+          <div *ngIf="!edit" class="card-header text-center bg-primary text-white">Add Event</div>
+          <div *ngIf="edit"class="card-header text-center bg-danger text-white">Edit Event</div>
+          <div class="card-body">
+            <form [formGroup]="eventForm" (ngSubmit)="submit()">
+              <div class="mb-3">
+                <label for="title" class="form-label fw-bold">Title:</label>
+                <input type="text" class="form-control" id="title" name="title" formControlName="title" required>
+              </div>
+              <div class="mb-3">
+                <label for="descrip" class="form-label fw-bold">Description:</label>
+                <input type="text" class="form-control" id="descrip" name="descrip" formControlName="descrip" required>
+              </div>
+              <div class="mb-3">
+                <label for="date_start" class="form-label fw-bold">Date initial:</label>
+                <input type="date" class="form-control" id="date_start" name="date_start" formControlName="date_start" rows="3" required>
+                <div *ngIf="eventForm.hasError('startDateInvalid') && eventForm.get('date_start')?.touched" class="form-text text-danger">
+                    La fecha de inicio debe ser mayor a hoy.
+                  </div>
+            </div>
+              <div class="mb-3">
+                <label for="date_finish" class="form-label fw-bold">Date final:</label>
+                <input type="date" class="form-control" id="date_finish" name="date_finish" formControlName="date_finish" required>
+                <span *ngIf="eventForm.hasError('endDateInvalid') && eventForm.get('date_start')?.touched" class="form-text text-danger">
+                    La fecha de inicio debe ser mayor a hoy.
+                  </span>
+            </div>
+              <div class="mb-3">
+                <label for="hour_start" class="form-label fw-bold">Hour Initial:</label>
+                <input type="time" class="form-control" id="hour_start" name="hour_start" formControlName="hour_start" required>
+              </div>
+              <div class="mb-3">
+                <label for="hour_finish" class="form-label fw-bold">Hour Final:</label>
+                <input type="time" class="form-control" id="hour_finish" name="hour_finish" formControlName="hour_finish" required>
+                <div *ngIf="eventForm.hasError('endTimeInvalid') && eventForm.get('hour_finish')?.touched" class="form-text text-danger">
+                    Si las fechas son iguales, la hora final debe ser mayor que la inicial.
+                  </div>
+            </div>
+              <div class="mb-3">
+                <label for="place" class="form-label fw-bold">Place:</label>
+                <input type="text" class="form-control" id="place" name="place" formControlName="place" required>
+              </div>
+              <div class="mb-3">
+                <label for="category" class="form-label fw-bold">Category:</label>
+                <input type="text" class="form-control" id="category" name="category" formControlName="category" required>
+              </div>
+              <div class="mb-3">
+                <label for="max_participant" class="form-label fw-bold">Max participants:</label>
+                <input type="number" class="form-control" id="max_participant" name="max_participant" formControlName="max_participant" required>
+              </div>
+              <div class="d-flex justify-content-between">
+                <a (click)="goBack()" class="btn btn-secondary rounded-pill">Back</a>
+                <button type="submit" class="btn btn-success rounded-pill">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>

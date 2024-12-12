@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { User } from '../interfaces/user';
@@ -45,6 +45,9 @@ export class UserService {
   isAdmin(): boolean {
     return this.currentUser?.role === 'admin';
   }
+  isOrg(): boolean {
+    return this.currentUser?.role === 'org';
+  }
 
   getUserRole():string {
     if(this.currentUser!=null){
@@ -73,6 +76,24 @@ export class UserService {
   logout():void {
     localStorage.removeItem('token');
     this.setCurrentUser(null);
+  }
+
+  getUserByEmail(email:string):Observable<User>{
+    const params = new HttpParams()
+      .set('email', email)
+    return this.http.get<User>(`${this.url}/userByEmail`,{params})
+  }
+
+  getUserById(id:number):Observable<User>{
+    return this.http.get<User>(`${this.url}/userById/${id}`);
+  }
+
+  getUsers():Observable<User[]>{
+    return this.http.get<User[]>(`${this.url}/users`);
+  }
+
+  changeRol(id:number):Observable<User>{
+    return this.http.get<User>(`${this.url}/changeRol/${id}`);
   }
 
 }
