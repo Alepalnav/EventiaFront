@@ -12,7 +12,7 @@ import { Rating } from '../interfaces/rating';
 })
 export class EventService {
 
-  private url: string = 'http://localhost:8080'
+  private url: string = 'https://eventiaapi.onrender.com'
 
   constructor(private http: HttpClient) {
     console.log('Servicio iniciado')
